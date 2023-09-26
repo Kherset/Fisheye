@@ -23,7 +23,7 @@ function homepageTemplate(data) {
         p2.textContent = `${price}Є/jour`;
 
         const linkPhotographer = document.createElement('a');
-        linkPhotographer.setAttribute("href", `scripts/templates/photographer.js?id=${id}`);
+        linkPhotographer.setAttribute("href", `photographer.html?id=${data.id}`);
         linkPhotographer.appendChild(photographer)
         photographer.appendChild(img);
         photographer.appendChild(h2);
