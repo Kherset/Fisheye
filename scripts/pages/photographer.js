@@ -27,7 +27,7 @@
           });
 
           if (photographer) {
-            console.log("Photographer found :", photographer);
+            // console.log("Photographer found :", photographer);
             return photographer;
           } else {
             console.log("No photographer found with the ID", id);
@@ -69,12 +69,21 @@ async function displayMedias() {
   medias.forEach(media => {
     createMedias(media)
   });
+  AddOrRemoveLike()
+  openLightbox()
+}
 
+async function displayRedCard() {
+  const photographer = await getPhotographersById(id)
+  const medias = await getMedias();
+  redCard(photographer, medias)
 }
 
 
-
-
-
+function buildPage() {
 displayPhotographer()
 displayMedias()
+displayRedCard()
+}
+
+buildPage()

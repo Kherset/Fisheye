@@ -65,28 +65,76 @@ function createMedias(data) {
   const likesElement = document.createElement('div');
   likesElement.className ='likes'
 
-  // Create number of number of like element
+  // Create number of like element
   const mediaNumber = document.createElement('p');
   mediaNumber.className ='likes-number'
   mediaNumber.textContent = likes;
 
   // Create item icon
-  const likesIcon = document.createElement('p')
-  likesIcon.className ='likes-icon'
-  likesIcon.innerHTML = '<i class="fa-solid fa-heart"></i>'
+  const likesIcon = document.createElement('i')
+  likesIcon.className ='fa-solid fa-heart likes-icon'
 
 
 
   // Building page
-  mediasContainer.appendChild(article)
-  article.appendChild(imageContainer)
-  imageContainer.appendChild(mediaElement)
-  article.appendChild(itemContent)
-  itemContent.appendChild(mediaTitle)
-  itemContent.appendChild(likesElement)
-  likesElement.appendChild(mediaNumber)
-  likesElement.appendChild(likesIcon)
+    mediasContainer.appendChild(article)
+    article.appendChild(imageContainer)
+    imageContainer.appendChild(mediaElement)
+    article.appendChild(itemContent)
+    itemContent.appendChild(mediaTitle)
+    itemContent.appendChild(likesElement)
+    likesElement.appendChild(mediaNumber)
+    likesElement.appendChild(likesIcon)
 
-  // article.appendChild()
+}
+
+
+
+
+function redCard(dataPhotographer, dataMedia) {
+  // Calculate sum of medias' likes.
+    let likes = 0;
+    const mediasbyID = dataMedia.filter(media => media.photographerId === id)
+    for (let i = 0; i < mediasbyID.length; i++) {
+      likes += mediasbyID[i].likes;
+    }
+    const likesSum = document.querySelector('.likes-sum')
+    likesSum.textContent = `${likes}`
+
+  // Display the photographer's price.
+    const price = dataPhotographer.price;
+    const priceTag = document.querySelector('.price-tag')
+    priceTag.textContent = `${price}€ / jour`
+}
+
+function AddOrRemoveLike() {
+    // Sélectionnez tous les boutons "J'aime" sur la page
+const likeButtons = document.querySelectorAll('.likes-icon');
+
+// Ajoutez un gestionnaire d'événements à chaque bouton "J'aime"
+likeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Trouvez le compteur de likes associé à ce bouton
+        console.log('Clique')
+        const likeCount = button.parentElement.querySelector('.likes-number');
+
+        // Obtenez le nombre actuel de likes depuis le compteur
+        let currentLikes = parseInt(likeCount.textContent);
+
+        // Vérifiez si le bouton a la classe "liked" pour déterminer si l'utilisateur a déjà aimé
+        if (button.classList.contains('liked')) {
+            // Diminue le nombre de likes si l'utilisateur a déjà aimé
+            currentLikes--;
+            button.classList.remove('liked');
+        } else {
+            // Augmente le nombre de likes si l'utilisateur n'a pas encore aimé
+            currentLikes++;
+            button.classList.add('liked');
+        }
+
+        // Mettez à jour le compteur de likes avec la nouvelle valeur
+        likeCount.textContent = currentLikes;
+    });
+});
 
 }

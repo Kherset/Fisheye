@@ -13,6 +13,7 @@
       <a href="index.html" class="homepage-link" aria-label="Logo du site redirigeant vers la page d'accueil"> <img src="assets/medias/logo.png" class="logo" alt="Fisheye Home page"/> </a>
     </nav>
 
+<!-------------------------- Header -------------------------->
       <header>
         <div class="photographer-content">
             <h2 class="photographer-name"></h2>
@@ -25,28 +26,7 @@
         <img class="photographer-photo">
       </header>
 
-      <main id="main">
-      <div class="sort_by">
-        <h4 class="sort_title">Trier par </h4>
-
-
-        <div class="dropdown">
-          <button class="dropbtn"><span>Popularité</span> &#9660;</button>
-          <div class="dropdown-content">
-            <button class="dropbtn"><span>Date</span></button>
-            <button class="dropbtn"><span>Titre</span></button>
-          </div>
-        </div>
-      </div>
-
-      <section id="medias-container">
-
-      </section>
-    </main>
-
-
-
-    <!-- Modal -->
+  <!-------------------------- Form Modal -------------------------->
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -62,11 +42,68 @@
 				</form>
 			</div>
 		</div>
-    <!-- Modal -->
+  <!-------------------------- Form Modal -------------------------->
+<!-------------------------- Header -------------------------->
 
+<!-------------------------- Main -------------------------->
+  <!-------------------------- Sort-By Elements -------------------------->
+      <main id="main">
+      <div class="sort_by">
+        <h4 class="sort_title">Trier par </h4>
+        <div class="dropdown">
+          <button class="dropbtn"><span>Popularité</span> &#9660;</button>
+          <div class="dropdown-content">
+            <button class="dropbtn"><span>Date</span></button>
+            <button class="dropbtn"><span>Titre</span></button>
+          </div>
+        </div>
+      </div>
+  <!-------------------------- Sort-By Elements -------------------------->
+
+  <!-------------------------- Medias Container -------------------------->
+      <section id="medias-container">
+      </section>
+  <!-------------------------- Medias Container -------------------------->
+
+  <!-------------------------- Red Card Element -------------------------->
+      <div class="red-card">
+        <span class="likes-card">
+          <p class="likes-sum"></p>
+          <i class="fa-solid fa-heart like-icon-red-card"></i>
+        </span>
+        <span class="daily-rate">
+          <p class="price-tag"></p>
+        </span>
+      </div>
+  <!-------------------------- Red Card Element -------------------------->
+    </main>
+<!-------------------------- Main -------------------------->
+
+
+
+<!-------------------------- Lightbox -------------------------->
+    <div id="lightbox">
+      <div class="lightbox-content">
+        <div class="lightbox-carrousel">
+          <div class="panels-lightbox left-panel-lightbox">
+            <i class="fa-solid fa-chevron-left" id="previous-arrow"></i>
+          </div>
+          <div class="lightbox-media-container">
+            <img src="assets/medias/527/Travel_Road_into_Hill.jpg" alt="" class="lightbox-media">
+          </div>
+          <div class="panels-lightbox right-panel-lightbox">
+            <i class="fa-solid fa-x close-button" id="close-lightbox"></i>
+            <i class="fa-solid fa-chevron-right" id="next-arrow"></i>
+          </div>
+        </div>
+        <div class="lightbox-text"> Arc-en-ciel</div>
+      </div>
+    </div>
+<!-------------------------- Lightbox -------------------------->
 
     <script src="scripts/templates/photographer.js" ></script>
     <script src="scripts/utils/contactForm.js" ></script>
     <script src="scripts/pages/photographer.js" ></script>
+    <script src="scripts/utils/lightbox.js" ></script>
   </body>
 </html>
