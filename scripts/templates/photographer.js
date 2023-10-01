@@ -34,19 +34,19 @@ function createMedias(data) {
         if (data.image && (data.image.endsWith('.jpg') || data.image.endsWith('.jpeg') || data.image.endsWith('.png'))) {
             const image = document.createElement('img');
             image.src = `assets/medias/${data.photographerId}/${data.image}`;
+            image.className = 'media-item img-item';
             return image;
         } else if (data.video && data.video.endsWith('.mp4')) {
             const video = document.createElement('video');
             video.src = `assets/medias/${data.photographerId}/${data.video}`;
-            video.controls = true;
+            video.className = 'media-item video-item';
+            // video.controls = true;
             return video;
         }
     }
-    // Si aucune image ni vidéo valide n'est trouvée, vous pouvez renvoyer null ou un élément de remplacement, par exemple un message d'erreur.
     return null;
 };
  const mediaElement = imageOrVideo(data);
- mediaElement.className = "media-item"
 
    // Create item content
    const itemContent = document.createElement('div')
@@ -74,8 +74,6 @@ function createMedias(data) {
   const likesIcon = document.createElement('i')
   likesIcon.className ='fa-solid fa-heart likes-icon'
 
-
-
   // Building page
     mediasContainer.appendChild(article)
     article.appendChild(imageContainer)
@@ -85,13 +83,52 @@ function createMedias(data) {
     itemContent.appendChild(likesElement)
     likesElement.appendChild(mediaNumber)
     likesElement.appendChild(likesIcon)
-
 }
 
 
+function AddOrRemoveLike() {
+  const likeButtons = document.querySelectorAll('.likes-icon');
 
+  likeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Find the likes counter associated with this button
+      const likeCount = button.parentElement.querySelector('.likes-number');
 
-function redCard(dataPhotographer, dataMedia) {
+      // Get the current number of likes from the counter
+      let currentLikes = parseInt(likeCount.textContent);
+
+      // Check if the button has the "liked" class to determine if the user has already liked
+      if (button.classList.contains('liked')) {
+        // Decrease the number of likes if the user has already liked
+        currentLikes--;
+        button.classList.remove('liked');
+      } else {
+        // Increase the number of likes if the user hasn't liked yet
+        currentLikes++;
+        button.classList.add('liked');
+      }
+      // Update the likes counter with the new value
+      likeCount.textContent = currentLikes.toString();
+
+      // Call the function to update likesSum
+      updateLikesSum();
+    });
+  });
+}
+
+function updateLikesSum() {
+  const likesElements = document.querySelectorAll('.likes-number');
+  let totalLikes = 0;
+
+  likesElements.forEach((likesElement) => {
+    totalLikes += parseInt(likesElement.textContent);
+  });
+
+  const likesSum = document.querySelector('.likes-sum');
+  likesSum.textContent = totalLikes.toString();
+}
+
+async function redCard(dataPhotographer, dataMedia) {
   // Calculate sum of medias' likes.
     let likes = 0;
     const mediasbyID = dataMedia.filter(media => media.photographerId === id)
@@ -99,42 +136,10 @@ function redCard(dataPhotographer, dataMedia) {
       likes += mediasbyID[i].likes;
     }
     const likesSum = document.querySelector('.likes-sum')
-    likesSum.textContent = `${likes}`
+    likesSum.textContent =  `${likes}`
 
   // Display the photographer's price.
     const price = dataPhotographer.price;
     const priceTag = document.querySelector('.price-tag')
     priceTag.textContent = `${price}€ / jour`
-}
-
-function AddOrRemoveLike() {
-    // Sélectionnez tous les boutons "J'aime" sur la page
-const likeButtons = document.querySelectorAll('.likes-icon');
-
-// Ajoutez un gestionnaire d'événements à chaque bouton "J'aime"
-likeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        // Trouvez le compteur de likes associé à ce bouton
-        console.log('Clique')
-        const likeCount = button.parentElement.querySelector('.likes-number');
-
-        // Obtenez le nombre actuel de likes depuis le compteur
-        let currentLikes = parseInt(likeCount.textContent);
-
-        // Vérifiez si le bouton a la classe "liked" pour déterminer si l'utilisateur a déjà aimé
-        if (button.classList.contains('liked')) {
-            // Diminue le nombre de likes si l'utilisateur a déjà aimé
-            currentLikes--;
-            button.classList.remove('liked');
-        } else {
-            // Augmente le nombre de likes si l'utilisateur n'a pas encore aimé
-            currentLikes++;
-            button.classList.add('liked');
-        }
-
-        // Mettez à jour le compteur de likes avec la nouvelle valeur
-        likeCount.textContent = currentLikes;
-    });
-});
-
 }

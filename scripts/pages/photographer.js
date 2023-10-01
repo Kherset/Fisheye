@@ -80,10 +80,30 @@ async function displayRedCard() {
 }
 
 
+// Créez une fonction pour mettre à jour likesSum
+function updateLikesSum() {
+  // Sélectionnez tous les éléments likes-number
+  const likesElements = document.querySelectorAll('.likes-number');
+
+  // Initialisez la somme des likes à 0
+  let totalLikes = 0;
+
+  // Parcourez tous les éléments likes-number et ajoutez leurs valeurs à totalLikes
+  likesElements.forEach((likesElement) => {
+    totalLikes += parseInt(likesElement.textContent);
+  });
+
+  // Mettez à jour le texte de likesSum avec la nouvelle valeur totale
+  const likesSum = document.querySelector('.likes-sum');
+  likesSum.textContent = totalLikes.toString();
+}
+
+
+
 function buildPage() {
-displayPhotographer()
-displayMedias()
-displayRedCard()
+  displayPhotographer();
+  displayMedias();
+  displayRedCard();
 }
 
 buildPage()

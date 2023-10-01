@@ -29,14 +29,20 @@
   <!-------------------------- Form Modal -------------------------->
     <div id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
+				<header id="form-header">
+          <h2 id="modal-title">Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 				<form>
 					<div>
 						<label>Prénom</label>
-						<input />
+						<input/>
+            <label>Nom</label>
+						<input/>
+            <label>Email</label>
+						<input/>
+            <label>Votre message</label>
+						<textarea rows="7" cols="auto"></textarea>
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
@@ -89,7 +95,7 @@
             <i class="fa-solid fa-chevron-left" id="previous-arrow"></i>
           </div>
           <div class="lightbox-media-container">
-            <img src="assets/medias/527/Travel_Road_into_Hill.jpg" alt="" class="lightbox-media">
+
           </div>
           <div class="panels-lightbox right-panel-lightbox">
             <i class="fa-solid fa-x close-button" id="close-lightbox"></i>
