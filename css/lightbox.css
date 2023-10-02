@@ -71,7 +71,7 @@
   box-sizing: content-box;
   height: 95%;
   margin-top: 20px;
-  object-fit: center;
+  object-fit: cover;
   width: 99%;
 }
 

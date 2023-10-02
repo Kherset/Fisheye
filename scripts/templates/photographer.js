@@ -86,7 +86,7 @@ function createMedias(data) {
 }
 
 
-function AddOrRemoveLike() {
+function addOrRemoveLike() {
   const likeButtons = document.querySelectorAll('.likes-icon');
 
   likeButtons.forEach((button) => {

@@ -69,7 +69,7 @@ async function displayMedias() {
   medias.forEach(media => {
     createMedias(media)
   });
-  AddOrRemoveLike()
+  addOrRemoveLike()
   openLightbox()
 }
 
@@ -80,20 +80,20 @@ async function displayRedCard() {
 }
 
 
-// Créez une fonction pour mettre à jour likesSum
+// Create a function to update likesSum
 function updateLikesSum() {
-  // Sélectionnez tous les éléments likes-number
+  // Select all elements with the class 'likes-number'
   const likesElements = document.querySelectorAll('.likes-number');
 
-  // Initialisez la somme des likes à 0
+  // Initialize the sum of likes to 0
   let totalLikes = 0;
 
-  // Parcourez tous les éléments likes-number et ajoutez leurs valeurs à totalLikes
+  // Iterate through all 'likes-number' elements and add their values to totalLikes
   likesElements.forEach((likesElement) => {
     totalLikes += parseInt(likesElement.textContent);
   });
 
-  // Mettez à jour le texte de likesSum avec la nouvelle valeur totale
+  // Update the text of likesSum with the new total value
   const likesSum = document.querySelector('.likes-sum');
   likesSum.textContent = totalLikes.toString();
 }
