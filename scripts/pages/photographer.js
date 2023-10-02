@@ -73,27 +73,27 @@ async function displayMedias() {
   openLightbox()
 }
 
-async function displayRedCard() {
+async function displaylikesAndPriceCard() {
   const photographer = await getPhotographersById(id)
   const medias = await getMedias();
-  redCard(photographer, medias)
+  likesAndPriceCard(photographer, medias)
 }
 
 
-// Create a function to update likesSum
+// Créez une fonction pour mettre à jour likesSum
 function updateLikesSum() {
-  // Select all elements with the class 'likes-number'
+  // Sélectionnez tous les éléments likes-number
   const likesElements = document.querySelectorAll('.likes-number');
 
-  // Initialize the sum of likes to 0
+  // Initialisez la somme des likes à 0
   let totalLikes = 0;
 
-  // Iterate through all 'likes-number' elements and add their values to totalLikes
+  // Parcourez tous les éléments likes-number et ajoutez leurs valeurs à totalLikes
   likesElements.forEach((likesElement) => {
     totalLikes += parseInt(likesElement.textContent);
   });
 
-  // Update the text of likesSum with the new total value
+  // Mettez à jour le texte de likesSum avec la nouvelle valeur totale
   const likesSum = document.querySelector('.likes-sum');
   likesSum.textContent = totalLikes.toString();
 }
@@ -103,7 +103,7 @@ function updateLikesSum() {
 function buildPage() {
   displayPhotographer();
   displayMedias();
-  displayRedCard();
+  displaylikesAndPriceCard();
 }
 
 buildPage()

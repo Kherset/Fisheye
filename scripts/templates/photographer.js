@@ -128,7 +128,7 @@ function updateLikesSum() {
   likesSum.textContent = totalLikes.toString();
 }
 
-async function redCard(dataPhotographer, dataMedia) {
+async function likesAndPriceCard(dataPhotographer, dataMedia) {
   // Calculate sum of medias' likes.
     let likes = 0;
     const mediasbyID = dataMedia.filter(media => media.photographerId === id)
