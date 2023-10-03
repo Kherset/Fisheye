@@ -1,46 +1,62 @@
-// Allows to retrieve the photographer's ID.
-    let params = new URL(document.location).searchParams;
-    let id = parseInt(params.get("id"));
+// Globals variables
+let jsonData = null;
+const id = getIdFromUrl(); // variables to retrieve ID from URL
 
-/**************************************** Photographers ****************************************/
+
+// The functions facilitating data retrieval.
+
+
+  // Allows to retrieve photographers' ID.
+      function getIdFromUrl() {
+        const params = new URL(document.location).searchParams;
+        const id = parseInt(params.get('id'));
+        return id;
+      }
+
+async function fetchData() {
+  try {
+      const response = await fetch('data/photographers.json');
+      if (!response.ok) {
+          throw new Error('Impossible de recuperer les donnees.');
+      }
+      jsonData = await response.json();
+  } catch (error) {
+      console.error(error);
+      jsonData = null;
+  }
+}
+
+      /**************************************** Photographers ****************************************/
   // Allows to retrieve all photographers from the JSON file.
-      async function getPhotographers() {
+  async function getPhotographers() {
+    if (jsonData === null) {
+        await fetchData();
+    }
+
+    if (jsonData) {
+        return jsonData.photographers;
+    } else {
+        return [];
+    }
+}
+
+  // Retrieve the photographer based on the ID.
+      async function getPhotographerById(id) {
         try {
-            const response = await fetch('data/photographers.json');
-            if (!response.ok) {
-                throw new Error('Unable to retrieve photographer data.');
-            }
-            const data = await response.json();
-            return data.photographers;
+          const photographers = await getPhotographers();
+          const photographer = photographers.find(photographer => photographer.id === id);
+          return photographer;
         } catch (error) {
-            console.error(error);
-            return [];
+          console.error("Photographe introuvable");
+          return null; // Null if error
         }
       }
 
-  // Allows to retrieve a photographer from his ID.
-      async function getPhotographersById(id) {
-          const photographers = await getPhotographers();
 
-          const photographer = photographers.find(function (photographer) {
-            return photographer.id === id;
-          });
 
-          if (photographer) {
-            // console.log("Photographer found :", photographer);
-            return photographer;
-          } else {
-            console.log("No photographer found with the ID", id);
-            return null;
-          }
-      }
 
-  async function displayPhotographer() {
-    const photographer = await getPhotographersById(id) // Photographer object retrieved.
-    photographerHeader(photographer)
-  }
+      /**************************************** Medias ****************************************/
 
-/**************************************** Medias ****************************************/
   // Allows to retrieve all photographers from the JSON file.
       async function getMedias() {
         try {
@@ -62,48 +78,12 @@
         return medias.filter(media => media.photographerId === id);
       }
 
-getMediasByPhotographerId(id)
 
-async function displayMedias() {
-  const medias = await getMediasByPhotographerId(id) // Photographer object retrieved.
-  medias.forEach(media => {
-    createMedias(media)
-  });
-  addOrRemoveLike()
-  openLightbox()
+
+
+function buildPhotographerPage() {
+  photographerHeader()
+  likesAndPriceCard()
 }
 
-async function displaylikesAndPriceCard() {
-  const photographer = await getPhotographersById(id)
-  const medias = await getMedias();
-  likesAndPriceCard(photographer, medias)
-}
-
-
-// Créez une fonction pour mettre à jour likesSum
-function updateLikesSum() {
-  // Sélectionnez tous les éléments likes-number
-  const likesElements = document.querySelectorAll('.likes-number');
-
-  // Initialisez la somme des likes à 0
-  let totalLikes = 0;
-
-  // Parcourez tous les éléments likes-number et ajoutez leurs valeurs à totalLikes
-  likesElements.forEach((likesElement) => {
-    totalLikes += parseInt(likesElement.textContent);
-  });
-
-  // Mettez à jour le texte de likesSum avec la nouvelle valeur totale
-  const likesSum = document.querySelector('.likes-sum');
-  likesSum.textContent = totalLikes.toString();
-}
-
-
-
-function buildPage() {
-  displayPhotographer();
-  displayMedias();
-  displaylikesAndPriceCard();
-}
-
-buildPage()
+buildPhotographerPage()

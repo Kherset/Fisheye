@@ -1,88 +1,92 @@
-function photographerHeader(data) {
-  const { name, portrait, city, country, tagline,} = data;
-  const picture = `assets/medias/IDPhotos/${portrait}`;
-
+// Build header for photographer page
+async function photographerHeader() {
+  const photographer = await getPhotographerById(id) //
   const photographerName = document.querySelector('.photographer-name')
   const photographerLocation = document.querySelector('.photographer-location')
   const photographerDescription = document.querySelector('.photographer-description')
   const photographerPhoto = document.querySelector('.photographer-photo')
 
-  photographerName.textContent = `${name}`;
-  photographerLocation.textContent = `${city}, ${country}`;
-  photographerDescription.textContent = `${tagline}`;
-  photographerPhoto.setAttribute('src', `${picture}`)
+  photographerName.textContent = `${photographer.name}`;
+  photographerLocation.textContent = `${photographer.city}, ${photographer.country}`;
+  photographerDescription.textContent = `${photographer.tagline}`;
+  photographerPhoto.setAttribute('src', `assets/medias/IDPhotos/${photographer.portrait}`)
 }
 
 
-function createMedias(data) {
-  const { id, photographerId, title, image, video, likes, date, price} = data;
-  const imageMedia = `assets/medias/${photographerId}/${image}`;
-  const videoMedia = `assets/medias/${photographerId}/${video}`;
+async function createMedia() {
+  const medias = await getMediasByPhotographerId(id);
   const mediasContainer = document.getElementById('medias-container');
 
-  // Create media element
-  const article = document.createElement('article')
-  article.className ='medias-item'
+  for (let i = 0; i < medias.length; i++) {
+    const media = medias[i];
 
-  // Create image container
-  const imageContainer = document.createElement('div')
-  imageContainer.className ='img-container'
+    // Create media element
+    const article = document.createElement('article');
+    article.className = 'medias-item';
 
-  // Create image or video element
-  const imageOrVideo = (data) => {
-    if (data && (data.image || data.video)) {
-        if (data.image && (data.image.endsWith('.jpg') || data.image.endsWith('.jpeg') || data.image.endsWith('.png'))) {
-            const image = document.createElement('img');
-            image.src = `assets/medias/${data.photographerId}/${data.image}`;
-            image.className = 'media-item img-item';
-            return image;
-        } else if (data.video && data.video.endsWith('.mp4')) {
-            const video = document.createElement('video');
-            video.src = `assets/medias/${data.photographerId}/${data.video}`;
-            video.className = 'media-item video-item';
-            // video.controls = true;
-            return video;
-        }
+    // Create image container
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'img-container';
+
+    // Create item content
+    const itemContent = document.createElement('div');
+    itemContent.className = 'item-content';
+
+    // Create title element
+    const mediaTitle = document.createElement('h4');
+    mediaTitle.className = 'item-title';
+    mediaTitle.textContent = media.title;
+
+    // Create likes container
+    const likesContainer = document.createElement('div');
+    likesContainer.className = 'likes';
+
+    // Create number of like element
+    const likesElement = document.createElement('div');
+    likesElement.className = 'likes';
+
+    // Create number of like element
+    const mediaNumber = document.createElement('p');
+    mediaNumber.className = 'likes-number';
+    mediaNumber.textContent = media.likes;
+
+    // Create item icon
+    const likesIcon = document.createElement('i');
+    likesIcon.className = 'fa-solid fa-heart likes-icon';
+
+    // Create media element and append it to the image container
+    const mediaElement = createMediaElement(media);
+    if (mediaElement) {
+      imageContainer.appendChild(mediaElement);
     }
-    return null;
-};
- const mediaElement = imageOrVideo(data);
 
-   // Create item content
-   const itemContent = document.createElement('div')
-   itemContent.className ='item-content'
+    // Building page
+    mediasContainer.appendChild(article);
+    article.appendChild(imageContainer);
+    article.appendChild(itemContent);
+    itemContent.appendChild(mediaTitle);
+    itemContent.appendChild(likesElement);
+    likesElement.appendChild(mediaNumber);
+    likesElement.appendChild(likesIcon);
+  }
 
-  // Create title element
-  const mediaTitle = document.createElement('h4');
-  mediaTitle.className ='item-title'
-  mediaTitle.textContent = title;
-
-  // Create item content
-  const likesContainer = document.createElement('div')
-  likesContainer.className ='likes'
-
-  // Create number of like element
-  const likesElement = document.createElement('div');
-  likesElement.className ='likes'
-
-  // Create number of like element
-  const mediaNumber = document.createElement('p');
-  mediaNumber.className ='likes-number'
-  mediaNumber.textContent = likes;
-
-  // Create item icon
-  const likesIcon = document.createElement('i')
-  likesIcon.className ='fa-solid fa-heart likes-icon'
-
-  // Building page
-    mediasContainer.appendChild(article)
-    article.appendChild(imageContainer)
-    imageContainer.appendChild(mediaElement)
-    article.appendChild(itemContent)
-    itemContent.appendChild(mediaTitle)
-    itemContent.appendChild(likesElement)
-    likesElement.appendChild(mediaNumber)
-    likesElement.appendChild(likesIcon)
+  function createMediaElement(media) {
+    if (media.image && (media.image.endsWith('.jpg') || media.image.endsWith('.jpeg') || media.image.endsWith('.png'))) {
+        const image = document.createElement('img');
+        image.src = `assets/medias/${media.photographerId}/${media.image}`;
+        image.className = 'media-item img-item';
+        return image;
+    } else if (media.video && media.video.endsWith('.mp4')) {
+        const video = document.createElement('video');
+        video.src = `assets/medias/${media.photographerId}/${media.video}`;
+        video.className = 'media-item video-item';
+        return video;
+    } else {
+      return null;
+    }
+  }
+  openLightbox()
+  addOrRemoveLike()
 }
 
 
@@ -116,30 +120,47 @@ function addOrRemoveLike() {
   });
 }
 
+// Create a function to update likesSum
 function updateLikesSum() {
   const likesElements = document.querySelectorAll('.likes-number');
   let totalLikes = 0;
 
+  // Iterate through all the likes-number elements and add their values to totalLikes
   likesElements.forEach((likesElement) => {
-    totalLikes += parseInt(likesElement.textContent);
+  totalLikes += parseInt(likesElement.textContent);
   });
 
+  // Update the text of likesSum with the new total value
   const likesSum = document.querySelector('.likes-sum');
   likesSum.textContent = totalLikes.toString();
 }
 
-async function likesAndPriceCard(dataPhotographer, dataMedia) {
+
+async function calculateTotalLikes() {
+  await createMedia()
+  let sumLikes = 0;
+  const likes = document.querySelectorAll('.likes-number')
+  for (let i = 0; i < likes.length; i++) {
+    const like = likes[i];
+    sumLikes += parseInt(like.innerText)
+  }
+  return sumLikes
+}
+
+async function priceOfThePhotographer() {
+  const photographer = await getPhotographerById(id)
+  return photographer.price
+}
+
+
+async function likesAndPriceCard() {
   // Calculate sum of medias' likes.
-    let likes = 0;
-    const mediasbyID = dataMedia.filter(media => media.photographerId === id)
-    for (let i = 0; i < mediasbyID.length; i++) {
-      likes += mediasbyID[i].likes;
-    }
+    const likes = await calculateTotalLikes()
     const likesSum = document.querySelector('.likes-sum')
     likesSum.textContent =  `${likes}`
 
   // Display the photographer's price.
-    const price = dataPhotographer.price;
+    const price = await priceOfThePhotographer()
     const priceTag = document.querySelector('.price-tag')
     priceTag.textContent = `${price}€ / jour`
 }

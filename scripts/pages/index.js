@@ -5,7 +5,6 @@ async function getPhotographers() {
           throw new Error('Impossible de récupérer les données des photographes.');
       }
       const data = await response.json();
-      console.log(data.photographers);
       return data.photographers;
   } catch (error) {
       console.error(error);
