@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/8f5705fdf5.js" crossorigin="anonymous"></script>
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <nav>
-      <a href="index.html" class="homepage-link" aria-label="Logo du site redirigeant vers la page d'accueil"> <img src="assets/medias/logo.png" class="logo" alt="Fisheye Home page"/> </a>
-    </nav>
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/8f5705fdf5.js" crossorigin="anonymous"></script>
+  <title>Fisheye - photographe</title>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="homepage-link" aria-label="Logo du site redirigeant vers la page d'accueil">
+      <img src="assets/medias/logo.png" class="logo" alt="Fisheye Home page"/>
+    </a>
+  </nav>
 
-<!-------------------------- Header -------------------------->
-      <header>
-        <div class="photographer-content">
-            <h2 class="photographer-name"></h2>
-          <div class="photographer-informations">
-            <h3 class="photographer-location"></h3>
-            <p class="photographer-description"></p>
-          </div>
-        </div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <img class="photographer-photo">
-      </header>
+  <!-- Header -->
+  <header>
+    <div class="photographer-content">
+      <h2 class="photographer-name"></h2>
+      <div class="photographer-informations">
+        <h3 class="photographer-location"></h3>
+        <p class="photographer-description"></p>
+      </div>
+    </div>
+    <button class="header-contact_button" onclick="displayModal()">Contactez-moi</button>
+    <img class="photographer-photo">
+  </header>
 
-  <!-------------------------- Form Modal -------------------------->
-
+  <!-- Form Modal -->
   <div id="contact_modal">
     <div id="bg-form-modal"></div>
     <div class="modal">
@@ -49,71 +50,59 @@
         <button class="contact_button">Envoyer</button>
       </form>
     </div>
-
   </div>
 
-<!-------------------------- Form Modal -------------------------->
-<!-------------------------- Header -------------------------->
-
-<!-------------------------- Main -------------------------->
-  <!-------------------------- Sort-By Elements -------------------------->
-      <main id="main">
-      <div class="sort_by">
-        <h4 class="sort_title">Trier par </h4>
-        <div class="dropdown">
-          <button id="sortByPopularity" class="dropbtn"><span>Popularité</span> &#9660;</button>
-          <div class="dropdown-content">
-            <button id="sortByDate" class="dropbtn"><span>Date</span></button>
-            <button id="sortByTitle" class="dropbtn"><span>Titre</span></button>
-          </div>
+  <!-- Main -->
+  <main id="main">
+    <!-- Sort-By Elements -->
+    <div class="sort_by">
+      <h4 class="sort_title">Trier par </h4>
+      <div class="dropdown">
+        <button id="sortByPopularity" class="dropbtn"><span>Popularité</span> &#9660;</button>
+        <div class="dropdown-content">
+          <button id="sortByDate" class="dropbtn"><span>Date</span></button>
+          <button id="sortByTitle" class="dropbtn"><span>Titre</span></button>
         </div>
-      </div>
-  <!-------------------------- Sort-By Elements -------------------------->
-
-  <!-------------------------- Medias Container -------------------------->
-      <section id="medias-container">
-      </section>
-  <!-------------------------- Medias Container -------------------------->
-
-  <!-------------------------- Red Card Element -------------------------->
-      <div class="red-card">
-        <span class="likes-card">
-          <p class="likes-sum"></p>
-          <i class="fa-solid fa-heart like-icon-red-card"></i>
-        </span>
-        <span class="daily-rate">
-          <p class="price-tag"></p>
-        </span>
-      </div>
-  <!-------------------------- Red Card Element -------------------------->
-    </main>
-<!-------------------------- Main -------------------------->
-
-
-
-<!-------------------------- Lightbox -------------------------->
-    <div id="lightbox">
-      <div class="lightbox-content">
-        <div class="lightbox-carrousel">
-          <div class="panels-lightbox left-panel-lightbox">
-            <i class="fa-solid fa-chevron-left" id="previous-arrow"></i>
-          </div>
-          <div class="lightbox-media-container">
-
-          </div>
-          <div class="panels-lightbox right-panel-lightbox">
-            <i class="fa-solid fa-x close-button" id="close-lightbox"></i>
-            <i class="fa-solid fa-chevron-right" id="next-arrow"></i>
-          </div>
-        </div>
-        <div class="lightbox-text"></div>
       </div>
     </div>
-<!-------------------------- Lightbox -------------------------->
 
-    <script src="scripts/templates/photographer.js" ></script>
-    <script src="scripts/utils/contactForm.js" ></script>
-    <script src="scripts/pages/photographer.js" ></script>
-    <script src="scripts/utils/lightbox.js" ></script>
-  </body>
+    <!-- Medias Container -->
+    <section id="medias-container">
+    </section>
+
+    <!-- Red Card Element -->
+    <div class="red-card">
+      <span class="likes-card">
+        <p class="likes-sum"></p>
+        <i class="fa-solid fa-heart like-icon-red-card"></i>
+      </span>
+      <span class="daily-rate">
+        <p class="price-tag"></p>
+      </span>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <div class="lightbox-content">
+      <div class="lightbox-carrousel">
+        <div class="panels-lightbox left-panel-lightbox">
+          <i class="fa-solid fa-chevron-left" id="previous-arrow"></i>
+        </div>
+        <div class="lightbox-media-container">
+        </div>
+        <div class="panels-lightbox right-panel-lightbox">
+          <i class="fa-solid fa-x close-button" id="close-lightbox"></i>
+          <i class="fa-solid fa-chevron-right" id="next-arrow"></i>
+        </div>
+      </div>
+      <div class="lightbox-text"></div>
+    </div>
+  </div>
+
+  <script src="scripts/templates/photographer.js"></script>
+  <script src="scripts/utils/contactForm.js"></script>
+  <script src="scripts/pages/photographer.js"></script>
+  <script src="scripts/utils/lightbox.js"></script>
+</body>
 </html>
