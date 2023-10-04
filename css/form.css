@@ -1,35 +1,48 @@
+#bg-form-modal {
+  background-color: rgba(77, 77, 77, 0.4);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
 .modal {
-  align-items: center;
+  /* align-items: center; */
   background-color: #DB8876;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: auto;
-  padding: 35px;
+  padding: 20px 35px;
   position: fixed;
   top: 8%;
-  left: 30%;
-  width: 40%;
-  z-index: 3;
+  left: 32.5%;
+  width: 35%;
+  z-index: 2;
 }
 
 #form-header {
-  background-color: blue;
+  background-color: #DB8876;
   height: 100px;
-  justify-content: space-between;
-  margin: 0;
-  width: 80%;
+  margin-bottom: 15px;
+  width: 90%;
 }
 
 #form-header img {
   cursor: pointer;
+  height: 30px;
+  position: absolute;
+  top: 32px;
+  right: 20px;
 }
 
 #form-header h2 {
+  display: flex;
   font-size: 40px;
   font-weight: normal;
-  text-align: center;
 }
 
 form {
@@ -41,7 +54,20 @@ form {
 
 form label {
   color: #312E2E;
-  font-size: 36px;
+  font-size: 25px;
+}
+
+.header-contact_button {
+  background-color: #901C1C;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: -20%;
+  padding: 10px 1px;
+  width: 15%;
 }
 
 form div {
@@ -55,6 +81,22 @@ form div {
 form input {
   border: none;
   border-radius: 5px;
-  height: 68px;
+  height: 40px;
   width: 100%;
+}
+
+form textarea {
+  height: 120px;
+  width: 100%;
+}
+
+.contact_button {
+  background-color: #901C1C;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 15px;
+  width: 30%;
 }
