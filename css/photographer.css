@@ -152,6 +152,7 @@
       /* When hovering over the options, change the background color */
           .dropbtn:hover {
             background-color: rgba(244, 28, 28, 0.5);
+            cursor: pointer;
           }
 
       /* Display the dropdown menu content when the button is hovered over */
@@ -203,6 +204,7 @@
 
       .media-item  {
         border-radius: 5px;
+        cursor: pointer;
         height: 100%;
         left: 0;
         object-fit: cover;
@@ -226,6 +228,13 @@
 
       .likes-icon {
         margin-left: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding-top: 2px;
+      }
+
+      .likes-icon:hover {
+        color: rgba(144, 28, 28, 0.8)
       }
 
   /****************** Medias ******************/

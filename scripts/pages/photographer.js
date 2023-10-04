@@ -1,85 +1,81 @@
 // Globals variables
 let jsonData = null;
-const id = getIdFromUrl(); // variables to retrieve ID from URL
+const id = getIdFromUrl();
 
+// Function to retrieve ID from URL
+function getIdFromUrl() {
+  const params = new URL(document.location).searchParams;
+  const id = parseInt(params.get('id'));
+  return id;
+}
 
-// The functions facilitating data retrieval.
-
-
-  // Allows to retrieve photographers' ID.
-      function getIdFromUrl() {
-        const params = new URL(document.location).searchParams;
-        const id = parseInt(params.get('id'));
-        return id;
-      }
-
+// Function to fetch data
 async function fetchData() {
   try {
-      const response = await fetch('data/photographers.json');
-      if (!response.ok) {
-          throw new Error('Impossible de recuperer les donnees.');
-      }
-      jsonData = await response.json();
+    const response = await fetch('data/photographers.json');
+    if (!response.ok) {
+      throw new Error('Unable to retrieve data.');
+    }
+    jsonData = await response.json();
   } catch (error) {
-      console.error(error);
-      jsonData = null;
+    console.error(error);
+    jsonData = null;
   }
 }
 
-      /**************************************** Photographers ****************************************/
-  // Allows to retrieve all photographers from the JSON file.
-  async function getPhotographers() {
-    if (jsonData === null) {
-        await fetchData();
-    }
+// Function to retrieve photographers
+async function getPhotographers() {
+  if (jsonData === null) {
+    await fetchData();
+  }
 
-    if (jsonData) {
-        return jsonData.photographers;
-    } else {
-        return [];
-    }
+  return jsonData ? jsonData.photographers : [];
 }
 
-  // Retrieve the photographer based on the ID.
-      async function getPhotographerById(id) {
-        try {
-          const photographers = await getPhotographers();
-          const photographer = photographers.find(photographer => photographer.id === id);
-          return photographer;
-        } catch (error) {
-          console.error("Photographe introuvable");
-          return null; // Null if error
-        }
-      }
-
-
-
+// Function to retrieve a photographer by ID
+async function getPhotographerById(id) {
+  try {
+    const photographers = await getPhotographers();
+    return photographers.find(photographer => photographer.id === id) || null;
+  } catch (error) {
+    console.error("Photographer not found");
+    return null;
+  }
+}
 
       /**************************************** Medias ****************************************/
 
-  // Allows to retrieve all photographers from the JSON file.
-      async function getMedias() {
-        try {
-            const response = await fetch('data/photographers.json');
-            if (!response.ok) {
-                throw new Error('Unable to retrieve medias data.');
-            }
-            const data = await response.json();
-            return data.media;
-        } catch (error) {
-            console.error(error);
-            return [];
-        }
-      }
+// Function to retrieve medias
+async function getMedias() {
+  try {
+    const response = await fetch('data/photographers.json');
+    if (!response.ok) {
+      throw new Error('Unable to retrieve media data.');
+    }
+    const data = await response.json();
+    return data.media || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
-  // Allows the use of the photographer's ID to retrieve the associated media.
-      async function getMediasByPhotographerId(id) {
-        const medias = await getMedias();
-        return medias.filter(media => media.photographerId === id);
-      }
+// Function to retrieve medias by photographer ID
+async function getMediasByPhotographerId(id) {
+  const medias = await getMedias();
+  return medias.filter(media => media.photographerId === id);
+}
 
-
-
+// Function to build photographer page
+async function buildPhotographerPage() {
+  const photographer = await getPhotographerById(id);
+  if (photographer) {
+    photographerHeader(photographer);
+    createMedia(photographer);
+  } else {
+    console.error("Photographer not found");
+  }
+}
 
 function buildPhotographerPage() {
   photographerHeader()

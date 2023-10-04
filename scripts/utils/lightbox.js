@@ -1,65 +1,93 @@
-// Get references to HTML elements for the lightbox functionality.
-const lightbox = document.getElementById('lightbox');
-const lightboxContainer = document.querySelector('.lightbox-media-container');
-const nextArrow = document.getElementById('next-arrow');
-const previousArrow = document.getElementById('previous-arrow');
-let currentIndex = 0; // Initialize the index of the currently displayed media.
-let lightboxMedia; // Variable to store the currently displayed media element.
+// Function to open the lightbox
+function openLightbox() {
+  const medias = document.querySelectorAll('.media-item');
+  let currentIndex = 0;
 
-// Open lightbox
-async function openLightbox() {
-  const medias = document.querySelectorAll('.media-item'); // Get all media items.
-  currentIndex = 0; // Initialize the index to 0.
 
-  // Add click event listeners to each media item.
-    for (let i = 0; i < medias.length; i++) {
-      let currentMedia = medias[i];
+  // Function to display a media
+function displayMedia(index) {
+  const lightboxContainer = document.querySelector('.lightbox-media-container');
+  lightboxContainer.innerHTML = '';
 
-      currentMedia.addEventListener('click', () => {
-        currentIndex = i; // Update the current index.
-        displayMedia(currentIndex); // Display the selected media.
-        lightbox.style.display = 'block'; // Show the lightbox.
-      });
-    }
+  const currentMedia = medias[index];
 
-  // Add click event listeners to the next and previous navigation arrows.
-    nextArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % medias.length; // Move to the next media.
-      displayMedia(currentIndex); // Display the new media.
-    });
+  // Update lightbox's title
+    const title = currentMedia.parentNode.parentNode.childNodes[1].childNodes[0].outerText
+    const titleLocation = document.querySelector('.lightbox-text')
+    titleLocation.innerText = title
 
-    previousArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + medias.length) % medias.length; // Move to the previous media.
-      displayMedia(currentIndex); // Display the new media.
-    });
 
-  function displayMedia(index) {
-    // Clear the previous content of the lightbox.
-    lightboxContainer.innerHTML = '';
 
-    const currentMedia = medias[index];
-    if (currentMedia.classList.contains('img-item')) {
-      // If it's an image, create an image element and display it.
-      lightboxMedia = document.createElement('img');
-      lightboxMedia.src = currentMedia.src;
-      lightboxMedia.setAttribute('alt', 'Image');
-      lightboxMedia.className = 'lightbox-media';
-      lightboxContainer.appendChild(lightboxMedia);
-    } else if (currentMedia.classList.contains('video-item')) {
-      // If it's a video, create a video element and display it.
-      lightboxMedia = document.createElement('video');
-      lightboxMedia.src = currentMedia.src;
-      lightboxMedia.setAttribute('alt', 'Video');
-      lightboxMedia.className = 'lightbox-media';
-      lightboxMedia.controls = true; // Enable video controls.
-      lightboxContainer.appendChild(lightboxMedia);
-    }
+  if (currentMedia.classList.contains('img-item')) {
+    displayImage(currentMedia.src);
+  } else if (currentMedia.classList.contains('video-item')) {
+    displayVideo(currentMedia.src);
   }
 }
 
-// Close lightbox
-const close = document.getElementById('close-lightbox');
-close.addEventListener('click', function () {
-  lightbox.style.display = 'none'; // Hide the lightbox.
-  lightboxContainer.innerHTML = ''; // Clear the content of the lightbox when closing.
-});
+  // Function to change the displayed media
+  function changeMedia(direction) {
+    currentIndex = (currentIndex + (direction === 'next' ? 1 : -1) + medias.length) % medias.length;
+    displayMedia(currentIndex);
+  }
+
+  // Function to display an image in the lightbox
+  function displayImage(src) {
+    const lightboxMedia = createMediaElement('img', src);
+    lightboxMedia.alt = 'Image';
+    lightboxMedia.className = 'lightbox-media';
+    displayInLightbox(lightboxMedia);
+  }
+
+  // Function to display a video in the lightbox
+  function displayVideo(src) {
+    const lightboxMedia = createMediaElement('video', src);
+    lightboxMedia.alt = 'Video';
+    lightboxMedia.className = 'lightbox-media';
+    lightboxMedia.controls = true;
+    displayInLightbox(lightboxMedia);
+  }
+
+  // Function to create a media element
+  function createMediaElement(tagName, src) {
+    const media = document.createElement(tagName);
+    media.src = src;
+    return media;
+  }
+
+  // Function to display the media in the lightbox
+  function displayInLightbox(mediaElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContainer = document.querySelector('.lightbox-media-container');
+    lightboxContainer.innerHTML = '';
+    lightboxContainer.appendChild(mediaElement);
+    lightbox.style.display = 'block';
+  }
+
+  // Event handlers for arrows
+  document.getElementById('next-arrow').addEventListener('click', () => changeMedia('next'));
+  document.getElementById('previous-arrow').addEventListener('click', () => changeMedia('previous'));
+
+  // Event handler for closing the lightbox
+  document.getElementById('close-lightbox').addEventListener('click', () => {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+    document.querySelector('.lightbox-media-container').innerHTML = '';
+  });
+
+  // Event handlers for media items
+  function addClickEventToMedias() {
+    const medias = document.querySelectorAll('.media-item');
+    let currentIndex = 0;
+    let title =
+
+    medias.forEach((currentMedia, i) => {
+      currentMedia.addEventListener('click', () => {
+        currentIndex = i;
+        displayMedia(currentIndex);
+        document.getElementById('lightbox').style.display = 'block';
+      });
+    });
+  }
+  addClickEventToMedias();
+}
