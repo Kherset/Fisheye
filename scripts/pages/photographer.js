@@ -80,6 +80,7 @@ async function buildPhotographerPage() {
 function buildPhotographerPage() {
   photographerHeader()
   likesAndPriceCard()
+  headerModal()
 }
 
 buildPhotographerPage()
