@@ -70,6 +70,15 @@ function displayMedia(index) {
   document.getElementById('next-arrow').addEventListener('click', () => changeMedia('next'));
   document.getElementById('previous-arrow').addEventListener('click', () => changeMedia('previous'));
 
+  // Add event listener for keyboard arrow keys
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowLeft') {
+      changeMedia('previous'); // Previous media on left arrow key press
+    } else if (event.key === 'ArrowRight') {
+      changeMedia('next'); // Next media on right arrow key press
+    }
+  });
+
   // Event handler for closing the lightbox
   document.getElementById('close-lightbox').addEventListener('click', () => {
     const lightbox = document.getElementById('lightbox');
