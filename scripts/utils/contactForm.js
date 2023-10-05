@@ -22,10 +22,6 @@ function closeModal() {
 }
 
 document.querySelector("form").addEventListener("submit", function (event) {
-	event.preventDefault(); // Empêche l'envoi par défaut du formulaire
-
-	// Ici, vous pouvez ajouter un code pour effectuer des actions de traitement du formulaire si nécessaire
-
-	// Redirigez ensuite vers votre page d'accueil
+	event.preventDefault();
 	window.location.href = "index.html";
 });
