@@ -8,6 +8,7 @@ function homepageTemplate(data) {
         article.setAttribute('aria-label', `Carte du photographe ${name}`)
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        img.setAttribute('alt', `Photo du photographe ${name}`)
 
         const photographer = document.createElement('div');
         photographer.className = 'photographer_identity'

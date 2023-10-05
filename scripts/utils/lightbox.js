@@ -34,7 +34,8 @@ function displayMedia(index) {
   // Function to display an image in the lightbox
   function displayImage(src) {
     const lightboxMedia = createMediaElement('img', src);
-    lightboxMedia.alt = 'Image';
+    lightboxMedia.alt = 'Image selectionnee affichee en grand';
+    lightboxMedia.setAttribute('aria-label', `Image selectionnee affichee en grand`)
     lightboxMedia.className = 'lightbox-media';
     displayInLightbox(lightboxMedia);
   }
@@ -42,7 +43,8 @@ function displayMedia(index) {
   // Function to display a video in the lightbox
   function displayVideo(src) {
     const lightboxMedia = createMediaElement('video', src);
-    lightboxMedia.alt = 'Video';
+    lightboxMedia.alt = 'Video selectionnee affichee en grand';
+    lightboxMedia.setAttribute('aria-label', `Video selectionnee affichee en grand`)
     lightboxMedia.className = 'lightbox-media';
     lightboxMedia.controls = true;
     displayInLightbox(lightboxMedia);

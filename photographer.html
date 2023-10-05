@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/8f5705fdf5.js" crossorigin="anonymous"></script>
   <title>Fisheye - photographe</title>
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script src="https://kit.fontawesome.com/8f5705fdf5.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="homepage-link" aria-label="Logo du site redirigeant vers la page d'accueil">
-      <img src="assets/medias/logo.png" class="logo" alt="Fisheye Home page"/>
+    <a href="index.html" class="homepage-link">
+      <img src="assets/medias/logo.png" class="logo" alt="Fisheye Home page" aria-label="Logo du site, redirige vers la page d'accueil">
     </a>
   </nav>
 
   <!-- Header -->
   <header>
     <div class="photographer-content">
-      <h2 class="photographer-name"></h2>
+      <h2 class="photographer-name" aria-live="polite"></h2>
       <div class="photographer-informations">
         <h3 class="photographer-location"></h3>
         <p class="photographer-description"></p>
       </div>
     </div>
-    <button class="header-contact_button" onclick="displayModal()">Contactez-moi</button>
-    <img class="photographer-photo">
+    <button class="header-contact_button" onclick="displayModal()" aria-label="Bouton Contactez-moi, ouvre le formulaire de contact">Contactez-moi</button>
+    <img class="photographer-photo" alt="Photo du photographe">
   </header>
 
   <!-- Form Modal -->
@@ -34,20 +35,20 @@
     <div class="modal">
       <div id="form-header">
         <h2 id="modal-title"></h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire">
       </div>
-      <form>
+      <form action="index.html" method="POST">
         <div>
-          <label>Prénom</label>
-          <input/>
-          <label>Nom</label>
-          <input/>
-          <label>Email</label>
-          <input/>
-          <label>Votre message</label>
-          <textarea rows="4"></textarea>
+          <label for="prenom">Prénom</label>
+          <input id="prenom" name="prenom" type="text" required>
+          <label for="nom">Nom</label>
+          <input id="nom" name="nom" type="text" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+          <label for="message">Votre message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button type="submit" class="contact_button" aria-label="Bouton Contactez-moi, envoie le formulaire de contact">Envoyer</button>
       </form>
     </div>
   </div>
@@ -56,25 +57,25 @@
   <main id="main">
     <!-- Sort-By Elements -->
     <div class="sort_by">
-      <h4 class="sort_title">Trier par </h4>
+      <h4 class="sort_title">Trier par</h4>
       <div class="dropdown">
-        <button id="sortByPopularity" class="dropbtn"><span>Popularité</span> &#9660;</button>
+        <button id="sortByPopularity" class="dropbtn" aria-label="Bouton Popularité, permet de classer les médias par nombre de likes décroissant"><span>Popularité</span> &#9660;</button>
         <div class="dropdown-content">
-          <button id="sortByDate" class="dropbtn"><span>Date</span></button>
-          <button id="sortByTitle" class="dropbtn"><span>Titre</span></button>
+          <button id="sortByDate" class="dropbtn" aria-label="Bouton Date, permet de classer les médias par date d'ajout de la plus récente à la plus ancienne"><span>Date</span></button>
+          <button id="sortByTitle" class="dropbtn" aria-label="Bouton Titre, permet de classer les médias par ordre alphabétique"><span>Titre</span></button>
         </div>
       </div>
     </div>
 
     <!-- Medias Container -->
-    <section id="medias-container">
+    <section id="medias-container" aria-live="polite">
     </section>
 
     <!-- Red Card Element -->
     <div class="red-card">
       <span class="likes-card">
         <p class="likes-sum"></p>
-        <i class="fa-solid fa-heart like-icon-red-card"></i>
+        <i class="fa-solid fa-heart like-icon-red-card" aria-hidden="true"></i>
       </span>
       <span class="daily-rate">
         <p class="price-tag"></p>
@@ -83,17 +84,17 @@
   </main>
 
   <!-- Lightbox -->
-  <div id="lightbox">
+  <div id="lightbox" aria-hidden="true">
     <div class="lightbox-content">
       <div class="lightbox-carrousel">
         <div class="panels-lightbox left-panel-lightbox">
-          <i class="fa-solid fa-chevron-left" id="previous-arrow"></i>
+          <i class="fa-solid fa-chevron-left" id="previous-arrow" aria-hidden="true"></i>
         </div>
         <div class="lightbox-media-container">
         </div>
         <div class="panels-lightbox right-panel-lightbox">
-          <i class="fa-solid fa-x close-button" id="close-lightbox"></i>
-          <i class="fa-solid fa-chevron-right" id="next-arrow"></i>
+          <i class="fa-solid fa-x close-button" id="close-lightbox" aria-label="Fermer la lightbox"></i>
+          <i class="fa-solid fa-chevron-right" id="next-arrow" aria-hidden="true"></i>
         </div>
       </div>
       <div class="lightbox-text"></div>

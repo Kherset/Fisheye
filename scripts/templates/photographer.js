@@ -55,6 +55,7 @@ async function createMedia() {
     // Create item icon
     const likesIcon = document.createElement('i');
     likesIcon.className = 'fa-solid fa-heart likes-icon';
+    likesIcon.setAttribute('aria-label', `bouton like en forme de coeur, permet d'ajouter ou retirer un like a la photo`)
 
     // Create media element and append it to the image container
     const mediaElement = createMediaElement(media);

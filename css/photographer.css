@@ -5,7 +5,7 @@
 /****************** Header ******************/
   header {
     align-items: center;
-    background-color: lightgray;
+    background-color: #fafafa;
     display: flex;
     height: 200px;
     justify-content: space-between;
