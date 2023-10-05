@@ -117,7 +117,6 @@
           position: relative;
         }
 
-    /* Style of the dropdown menu content (initially hidden) */
         .dropdown-content {
           background-color: #901C1C;
           box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
@@ -138,12 +137,10 @@
           z-index: 1;
         }
 
-    /* When hovering over the options, change the background color */
         .dropbtn:hover {
           background-color: rgba(244, 28, 28, 0.5);
         }
 
-    /* Display the dropdown menu content when the button is hovered over */
         .dropdown:hover .dropdown-content {
           border-radius: 5px;
           display: block;
