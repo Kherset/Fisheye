@@ -30,7 +30,7 @@ body {
   margin: 0;
 }
 
-:focus {
+:focus-visible {
   border: 5px solid darkorange;
 }
 
