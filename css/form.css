@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 .modal {
@@ -20,7 +20,7 @@
   top: 8%;
   left: 32.5%;
   width: 35%;
-  z-index: 2;
+  z-index: 3;
 }
 
 #form-header {
@@ -38,9 +38,9 @@
   right: 20px;
 }
 
-#form-header h2 {
+#modal-title {
   display: flex;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: normal;
 }
 

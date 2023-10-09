@@ -60,12 +60,15 @@
   color: white;
 }
 
-.dropdown__list-item::after {
-  border: solid 50px blue;
+
+#option-1::before, #option-2::before, #option-3::before{
+  border: solid 1px white;
+  content: '';
   position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 3;
+  left: 10%;
+  margin-top: -10px;
+  width: 80%;
+  z-index: 4;
 }
 
 #dropdown__selected {
