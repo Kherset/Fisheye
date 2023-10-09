@@ -85,80 +85,10 @@
       font-weight: 900;
     }
 
-    #choices {
-      background-color: #901C1C;
-      color: white;
-      padding: 10px;
-    }
 /****************** Sort ******************/
 
 /****************** Main ******************/
 
-/****************** DropDown Menu ******************/
-    /* Dropdown menu button style */
-        .dropbtn {
-          background-color: #901C1C;
-          border: none;
-          border-radius: 5px;
-          color: white;
-          min-width: 114px;
-          padding: 12px 10px;
-          text-align: start;
-        }
-
-        .dropbtn span{
-          padding-right: 16px;
-        }
-    /* Dropdown menu div style */
-        .dropdown {
-          background-color: #901C1C;
-          border-radius: 5px;
-          display: inline-block;
-          position: relative;
-        }
-
-        .dropdown-content {
-          background-color: #901C1C;
-          box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
-          display: none;
-          min-width: 110px;
-          position: absolute;
-          text-decoration: none;
-          z-index: 1;
-        }
-
-        .dropdown-content:hover {
-          background-color: #901C1C;
-          box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
-          display: flex;
-          min-width: 110px;
-          position: absolute;
-          text-decoration: none;
-          z-index: 1;
-        }
-
-        .dropbtn:hover {
-          background-color: rgba(244, 28, 28, 0.5);
-        }
-
-        .dropdown:hover .dropdown-content {
-          border-radius: 5px;
-          display: block;
-        }
-
-        .dropbtn::after {
-          border-top: 1px solid white;
-          content: "";
-          display: block;
-          left: 5%;
-          position: absolute;
-          right: 5%;
-          top: 40px;
-          width: 90%;
-          z-index: 2;
-        }
-
-/****************** DropDown Menu ******************/
 
 /****************** Medias ******************/
     #medias-container {

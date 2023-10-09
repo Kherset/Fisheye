@@ -34,7 +34,7 @@
     <div class="modal">
       <div id="form-header">
         <h2 id="modal-title"></h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire">
+        <img src="assets/icons/close.svg" tabindex="-1" onclick="closeModal()" onkeydown="handleCloseModalKeyPress(event)" alt="Fermer le formulaire">
       </div>
       <form action="index.html" method="POST">
         <div>
@@ -57,13 +57,33 @@
     <!-- Sort-By Elements -->
     <div class="sort_by">
       <h4 class="sort_title">Trier par</h4>
-      <div class="dropdown">
-        <button id="sortByPopularity" class="dropbtn" aria-label="Bouton Popularité, permet de classer les médias par nombre de likes décroissant"><span>Popularité</span> &#9660;</button>
-        <div class="dropdown-content">
-          <button id="sortByDate" class="dropbtn" aria-label="Bouton Date, permet de classer les médias par date d'ajout de la plus récente à la plus ancienne"><span>Date</span></button>
-          <button id="sortByTitle" class="dropbtn" aria-label="Bouton Titre, permet de classer les médias par ordre alphabétique"><span>Titre</span></button>
-        </div>
-      </div>
+
+      <ul class="dropdown">
+        <i class="fa-solid fa-chevron-up"></i>
+        <li
+          role="button"
+          aria-labelledby="dropdown-label"
+          id="dropdown__selected"
+          tabindex="0"
+        >
+          Popularité
+
+
+        </li>
+        <li aria-expanded="false" role="list" class="dropdown__list-container">
+          <ul class="dropdown__list">
+            <li class="dropdown__list-item" tabindex="1" id="option-1" aria-label="Popularité, permet de classer les medias par popularité">
+              Popularité
+            </li>
+            <li class="dropdown__list-item" tabindex="1" id="option-2" aria-label="Date, permet de classer les medias par date">
+              Date
+            </li>
+            <li class="dropdown__list-item" tabindex="1" id="option-3" aria-label="Titre, permet de classer les medias par titre">
+              Titre
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
 
     <!-- Medias Container -->
@@ -92,7 +112,7 @@
         <div class="lightbox-media-container">
         </div>
         <div class="panels-lightbox right-panel-lightbox">
-          <i class="fa-solid fa-x close-button" id="close-lightbox" aria-label="Fermer la lightbox"></i>
+          <i class="fa-solid fa-x close-button" id="close-lightbox" tabindex="0" aria-label="Fermer la lightbox"></i>
           <i class="fa-solid fa-chevron-right" id="next-arrow" aria-hidden="true"></i>
         </div>
       </div>
@@ -100,6 +120,7 @@
     </div>
   </div>
 
+  <script src="scripts/utils/selectOptions.js"></script>
   <script src="scripts/templates/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
   <script src="scripts/pages/photographer.js"></script>

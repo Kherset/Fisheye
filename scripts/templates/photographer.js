@@ -17,9 +17,9 @@ async function photographerHeader() {
 async function createMedia() {
 	const medias = await getMediasByPhotographerId(id);
 	const mediasContainer = document.getElementById("medias-container");
-	const sortByDateButton = document.getElementById("sortByDate");
-	const sortByTitleButton = document.getElementById("sortByTitle");
-	const sortByPopularityButton = document.getElementById("sortByPopularity");
+	const sortByDateButton = document.getElementById("option-1");
+	const sortByTitleButton = document.getElementById("option-2");
+	const sortByPopularityButton = document.getElementById("option-3");
 
 	for (let i = 0; i < medias.length; i++) {
 		const media = medias[i];
@@ -57,6 +57,7 @@ async function createMedia() {
 		// Create item icon
 		const likesIcon = document.createElement("i");
 		likesIcon.className = "fa-solid fa-heart likes-icon";
+		likesIcon.tabIndex = -1;
 		likesIcon.setAttribute("aria-label", "bouton like en forme de coeur, permet d'ajouter ou retirer un like a la photo");
 
 		// Create media element and append it to the image container
@@ -64,19 +65,6 @@ async function createMedia() {
 		if (mediaElement) {
 			imageContainer.appendChild(mediaElement);
 		}
-
-		// Event handlers for sorting buttons
-		sortByDateButton.addEventListener("click", function() {
-			sortByDateRecentToOld(medias);
-		});
-
-		sortByTitleButton.addEventListener("click", function() {
-			sortByName(medias);
-		});
-
-		sortByPopularityButton.addEventListener("click", function() {
-			sortByPopularity(medias);
-		});
 
 		// Building page
 		mediasContainer.appendChild(article);
@@ -87,9 +75,9 @@ async function createMedia() {
 		likesElement.appendChild(mediaNumber);
 		likesElement.appendChild(likesIcon);
 	}
-
 	openLightbox();
 	addOrRemoveLike();
+	setSelectOptions(medias);
 }
 
 function sortByName(medias) {
@@ -182,14 +170,19 @@ function updateMediaDisplay(medias) {
 }
 
 function createMediaElement(media) {
+
 	if (media.image && (media.image.endsWith(".jpg") || media.image.endsWith(".jpeg") || media.image.endsWith(".png"))) {
 		const image = document.createElement("img");
 		image.src = `assets/medias/${media.photographerId}/${media.image}`;
+		image.alt = "Photo realisee par le photographe" ;
+		image.tabIndex = 0;
 		image.className = "media-item img-item";
 		return image;
 	} else if (media.video && media.video.endsWith(".mp4")) {
 		const video = document.createElement("video");
+		video.tabIndex = 0;
 		video.src = `assets/medias/${media.photographerId}/${media.video}`;
+		video.alt = "Video realisee par le photographe" ;
 		video.className = "media-item video-item";
 		return video;
 	} else {
@@ -201,31 +194,39 @@ function addOrRemoveLike() {
 	const likeButtons = document.querySelectorAll(".likes-icon");
 
 	likeButtons.forEach((button) => {
-		button.addEventListener("click", () => {
-			// Find the likes counter associated with this button
-			const likeCount = button.parentElement.querySelector(".likes-number");
+		// Add an event handler for the "Enter" key
+		button.addEventListener("keydown", (event) => {
+			if (event.key === "Enter") {
+				// Find the likes counter associated with this button
+				const likeCount = button.parentElement.querySelector(".likes-number");
 
-			// Get the current number of likes from the counter
-			let currentLikes = parseInt(likeCount.textContent);
+				// Get the current number of likes from the counter
+				let currentLikes = parseInt(likeCount.textContent);
 
-			// Check if the button has the "liked" class to determine if the user has already liked
-			if (button.classList.contains("liked")) {
-				// Decrease the number of likes if the user has already liked
-				currentLikes--;
-				button.classList.remove("liked");
-			} else {
-				// Increase the number of likes if the user hasn't liked yet
-				currentLikes++;
-				button.classList.add("liked");
+				// Check if the button has the "liked" class to determine if the user has already liked
+				if (button.classList.contains("liked")) {
+					// Decrease the number of likes if the user has already liked
+					currentLikes--;
+					button.classList.remove("liked");
+				} else {
+					// Increase the number of likes if the user hasn't liked yet
+					currentLikes++;
+					button.classList.add("liked");
+				}
+				// Update the likes counter with the new value
+				likeCount.textContent = currentLikes.toString();
+
+				// Call the function to update likesSum
+				updateLikesSum();
 			}
-			// Update the likes counter with the new value
-			likeCount.textContent = currentLikes.toString();
-
-			// Call the function to update likesSum
-			updateLikesSum();
 		});
+
+		// Also add a "tabindex" attribute to the icons to make them focusable with "Tab"
+		button.tabIndex = 0;
 	});
 }
+
+
 
 function updateLikesSum() {
 	const likesElements = document.querySelectorAll(".likes-number");

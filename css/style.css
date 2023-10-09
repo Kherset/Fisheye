@@ -1,3 +1,4 @@
+@import url("dropdown.css");
 @import url("form.css");
 @import url("lightbox.css");
 @import url("photographer.css");
@@ -27,6 +28,10 @@
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
+}
+
+:focus {
+  border: 5px solid darkorange;
 }
 
 /****************** Header ******************/
